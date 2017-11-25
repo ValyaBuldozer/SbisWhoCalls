@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.avbykov.myapplication">
+
+    <application android:label="SBIS: Кто звонит?">
+        <!--- Нужно создать приложение, даже если это сервис -->
+        <activity android:name="com.tensor.tensorsbishwocalls.Main"
+            android:label="SBIS: Кто звонит?">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <!--- Регистрируем обработчик события -->
+                <receiver android:name="tensor.sbis.hwocalls.CallReceiver">
+                    <intent-filter android:priority="1">>
+                         <action android:name="android.intent.action.PHONE_STATE"/>
+                    </intent-filter>
+                </receiver>
+
+    </application>
+    <!--- Нужно разрешить всплывающие окна -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!--- А для  API >= 22 ужны еще и привилегии -->
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+    <!--- Нужно разрешить читать статусы звонков -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--- Нужно разрешить доступ приложению в интернет -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+</manifest>
